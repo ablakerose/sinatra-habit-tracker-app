@@ -54,3 +54,6 @@ Tux is an incredible Ruby gem that lets you access your database and perform all
 
 #CONTROLLERS AND INHERITANCE
 All controllers inherit from Application Controller because that gives all controllers any applications that are built in the application controller.
+
+#params
+the container/vehicle that is passed in by the user. Its a hash. Like a bus that goes back and forth from the views to the controllers. The passengers are the emails and carries
