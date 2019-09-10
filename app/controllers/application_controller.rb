@@ -13,4 +13,18 @@ class ApplicationController < Sinatra::Base
     erb :welcome
   end
 
+  helpers do 
+    def logged_in?
+      !!current_user
+    end
+
+    current_user
+      @current_user ||= User.find_by(id: session[:user_id])
+      #User.find_by is an active record method that's going to query the database.
+    end
+
+  
+  end
+
+
 end
