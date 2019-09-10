@@ -2,6 +2,9 @@
 
 # Create 2 users
 
+HabitEntry.destroy_all
+User.destroy_all
+
 blake = User.create(name: "Blake", email: "blake@blake.com", password: "password")
 liz = User.create(name: "Liz", email: "liz@blake.com", password: "password") 
 
