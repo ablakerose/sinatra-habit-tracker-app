@@ -65,7 +65,7 @@ within a form, the "class" refers to a CSS class; the "action" refers to route o
 rarely are we going to render from a post, patch or delete request. rendering should happen from a get request.
 
 #redirect
-when we redirect, we're sending a brand new get request. And when that happens, all variables created within that particular controller route/ action get annihilated and are gone. Redirects destroy instance variables. If we want an instance variable to live on, we can ERB:
+when we redirect, we're sending a brand new get request. And when that happens, all variables created within that particular controller route/ action get annihilated and are gone. Redirects destroy instance variables. If we want an instance variable to live on, we can ERB (which calls the render method)
 
 git commit -m 'add habit entries controller'
 git commit -m 'mount habit entries controller'
