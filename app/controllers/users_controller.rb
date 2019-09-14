@@ -12,10 +12,10 @@ class UsersController < ApplicationController
         #params look like: {email: "user@user.com", password: "password"}
         #creating a session which is actually adding a key value pair to the sessions hash
         #find the user
-        @user=User.find_by(email: params[:email])
+        @user = User.find_by(email: params[:email])
         #Autenticate the user = verify the user is whot hey say tehy are
         #they have the credentials - email/password combo
-        if @user.authenticate(params[:password])
+        if @user && @user.authenticate(params[:password])
         #log the user in - create the user session
             session[:user_id] = @user.id #actually logging the user in
             # redirect to the user's landing page (show? index? dashboard?)
@@ -27,14 +27,52 @@ class UsersController < ApplicationController
         end
 
     end
-
-    get '/signup' do
     
+    # this route's job is to render the signup form
+    get '/signup' do
+        # erb (render) a view
+        erb :signup 
+
+    end
+
+   
+    post '/users' do 
+#here is where we will create a new user and persist the new user to the DB
+    
+        # "name"=>"Blake"
+        # "email"=>"blake@blake.com"
+        if params[:name] != "" && params[:email] != "" && params[:password] != ""
+            @user = User.create(params)
+            session[:user_id] = @user.id #actually logging the user in
+            #above, this is mass-assignment
+            #where do I go? one option is the user show page. 
+            redirect "/users/#{@user.id}"
+            #when we redirect
+            #this is the dynamic part of the URL. The only place where we use the symbol of the URL is where we define it which is inside the controller. In rails you do it in a different file.
+            #ERB, I'm looking for a path to the file. In application controller, I told sinatra that I'm putting views underneath the app folder in a folder called views, so that's what it's going to look for when I render wtih ERB.
+            #whwen we redirect, we're writing in the URL of the request we're sending. the result is a brand new get request. 
+            #the redirect is a better choice right now: 
+            #(1) only what a get request when you want to get to a page
+            #(2) separation of concerns
+            #(3) access to instance variable
+        else 
+            #not valid input
+            #it would be better to include a message to the user
+            #tell them what is wrong (stretch goal)
+            redirect '/signup'
+        end
+
     end
 
     get '/users/:id' do
-        "this will be the user show route"
+        
+        @user = User.find_by(id: params[:id])
+        erb :'/users/show'
     end
 
+    get '/logout' do
+        session.clear
+        redirect '/'
+    end
 
 end 

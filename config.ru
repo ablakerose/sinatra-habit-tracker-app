@@ -8,4 +8,5 @@ end
 #here is wher eI will mount other controllers with 'use'
 
 use UsersController
+use HabitEntriesController 
 run ApplicationController

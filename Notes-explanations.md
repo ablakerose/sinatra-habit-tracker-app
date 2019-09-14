@@ -57,3 +57,18 @@ All controllers inherit from Application Controller because that gives all contr
 
 #params
 the container/vehicle that is passed in by the user. Its a hash. Like a bus that goes back and forth from the views to the controllers. The passengers are the emails and carries
+
+#FORMS
+within a form, the "class" refers to a CSS class; the "action" refers to route of the controller we want to navigate to once it's subtmitted.
+
+#rendering
+rarely are we going to render from a post, patch or delete request. rendering should happen from a get request.
+
+#redirect
+when we redirect, we're sending a brand new get request. And when that happens, all variables created within that particular controller route/ action get annihilated and are gone. Redirects destroy instance variables. If we want an instance variable to live on, we can ERB:
+
+git commit -m 'add habit entries controller'
+git commit -m 'mount habit entries controller'
+git commit -m 'add views habit journal entries folder'
+git commit -m 'add link to new habit entry page'
+git commit -m 'add post entries, add new form, update spec.md'
