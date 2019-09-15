@@ -39,6 +39,7 @@ class HabitEntriesController < ApplicationController
             end
         else
             redirect '/'
+        end
     end
 
         #This action's job is to... 
@@ -53,6 +54,7 @@ class HabitEntriesController < ApplicationController
                 redirect "/habit_entries/#{@habit_entry.id}"
             else
                 redirect "users/#{current_user.id}"
+            end
         else 
             redirect '/' 
         end

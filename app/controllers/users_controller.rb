@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    #what routs do I need for login? 
+    #what routes do I need for login? 
 
     #the purpose of this route is to render the login page (which is the login form)
     get '/login' do
@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     end
 
     # the purpose of this route is to receive the login form,
-    #find the user, and log the user, and log the user in(create a session)
+    #find the user and log the user in (create a session)
     post '/login' do
         #params look like: {email: "user@user.com", password: "password"}
         #creating a session which is actually adding a key value pair to the sessions hash
@@ -76,3 +76,66 @@ class UsersController < ApplicationController
     end
 
 end 
+
+
+
+
+
+
+
+
+
+
+
+
+
+# class UsersController < ApplicationController
+
+ 
+#     get '/login' do
+#       redirect_if_logged_in
+#       erb :login
+#     end
+  
+#     post '/login' do
+#       @user = User.find_by(email: params[:email])
+#       if @user && @user.authenticate(params[:password])
+#         session[:user_id] = @user.id 
+#         flash[:message] = "Welcome, #{@user.name}!"
+#         redirect "users/#{@user.id}"
+#       else
+#         flash[:errors] = "Your credentials were invalid.  Please sign up or try again."
+#         redirect '/login'
+#       end
+#     end
+  
+#     get '/signup' do
+#       redirect_if_logged_in
+#       erb :signup
+#     end
+  
+#     post '/users' do
+#           @user = User.new(params)
+#         if @user.save
+#         session[:user_id] = @user.id # actually logging the user in
+#         flash[:message] = "You have successfully created an account, #{@user.name}! Welcome!"
+#         redirect "/users/#{@user.id}"
+#       else
+#        flash[:errors] = "Account creation failure: #{@user.errors.full_messages.to_sentence}"
+#         redirect '/signup'
+#       end
+#     end
+  
+#     get '/users/:id' do
+#       @user = User.find_by(id: params[:id])
+#       redirect_if_not_logged_in
+  
+#       erb :'/users/show'
+#     end
+  
+#     get '/logout' do
+#       session.clear
+#       redirect '/'
+#     end
+  
+#   end
