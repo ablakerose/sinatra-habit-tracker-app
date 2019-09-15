@@ -1,2 +1,8 @@
-EDIT FORM GOES HERE...
+EDIT PAGE FOR A HABIT ENTRY
 
+<form class="" action="/habit_entries/"<%habit_entry.id" method="post">
+    <input type="hidden" name="_method" value="patch">    
+    <label for="content">Content:</label>
+    <textarea name="content" style="width:auto; height:auto;"><%= habit_entry.habit_content%></textarea>
+    <input type="submit" name="" value="Edit Habit Entry">
+</form>  
