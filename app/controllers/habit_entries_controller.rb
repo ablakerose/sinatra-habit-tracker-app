@@ -2,7 +2,8 @@ class HabitEntriesController < ApplicationController
 
     #get habit_entries/new to render a form to create new entry
     get '/habit_entries' do
-        erb :'/journal_entries/new'
+        @habit_entries = HabitEntry.all
+        erb :'habit_entries/index'
     end
 
     post '/habit_entries' do
@@ -27,10 +28,10 @@ class HabitEntriesController < ApplicationController
         erb ':habit_entries/show'
     end
 
-    #this route should send us to the habit_entries/edit.erb, whcih will
+    #this route should send us to the habit_entries/edit.erb, which will
     #render an edit form
     get '/habit_entries/:id/edit' do
-        set_journal_entry
+        set_habit_entry
         if logged_in?
             if @habit_entry.user == current_user
                 erb :'habit_entries/edit'
@@ -44,11 +45,11 @@ class HabitEntriesController < ApplicationController
 
         #This action's job is to... 
     patch '/habit_entries/:id' do
-       #1. find the journal entry
+       #1. find the habit entry
        set_habit_entry
        if logged_in?
             if @habit_entry.user == current_user
-                #2. update the journal entry
+                #2. update the habit entry
                 @habit_entry.update(habit_content: params[:content])
                 #3. redirect to the show page of whatever was just created or modified. 
                 redirect "/habit_entries/#{@habit_entry.id}"
@@ -68,7 +69,7 @@ class HabitEntriesController < ApplicationController
     def set_habit_entry
         @habit_entry = HabitEntry.find(params[:id])
     end
-    # post journal_entries to create a new journal entry
+    # post habit_entries to create a new habit entry
     # how route for habit entry
     # index route for all habit entries
 
