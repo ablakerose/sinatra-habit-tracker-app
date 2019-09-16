@@ -67,8 +67,7 @@ rarely are we going to render from a post, patch or delete request. rendering sh
 #redirect
 when we redirect, we're sending a brand new get request. And when that happens, all variables created within that particular controller route/ action get annihilated and are gone. Redirects destroy instance variables. If we want an instance variable to live on, we can ERB (which calls the render method)
 
-git commit -m 'add habit entries controller'
-git commit -m 'mount habit entries controller'
-git commit -m 'add views habit journal entries folder'
-git commit -m 'add link to new habit entry page'
-git commit -m 'add post entries, add new form, update spec.md'
+#route variable
+that is the ':id'. It's like whatever comes after the slash is a route variable called 'id' that is put somewhere in the form of a hash (params). When a user submits data in an application through route variables or forms, all the data is stored in a hash params that is part of Rack.
+:id is a URL variable 
+query strings ?name=avi (this also goes in the params hash. The query is the "?" then the key is name and value is avi
