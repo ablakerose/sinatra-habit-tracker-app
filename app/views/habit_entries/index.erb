@@ -1,1 +1,8 @@
-INDEX PAGE FOR HABIT ENTRIES
+ALL HABIT ENTRIES 
+
+<% @habit_entries.each do |habit_entry| %>
+    <h6><a href="/habit_entries/<%= habit_entry.id %>"<%=journal_entry.created_at %></a></h6>
+    <p><%= habit_entry.created_at %></p> 
+    <p>By <%= habit_entry.user.name %></p>
+    <br><br>
+<% end %>
