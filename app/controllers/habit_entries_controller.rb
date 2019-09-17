@@ -6,6 +6,10 @@ class HabitEntriesController < ApplicationController
         erb :'habit_entries/index'
     end
 
+    get '/habit_entries/new' do 
+        erb :'habit_entries/new'
+    end
+
     post '/habit_entries' do
         #I want to create a new habit entry and save it to the database
         #BUT I only want to save a habit if it has some content
@@ -17,7 +21,7 @@ class HabitEntriesController < ApplicationController
         if params[:content] !=""
             #create a new habit_entry
             @habit_entry = HabitEntry.create(habit_content: params[:habit_content], user_id: current_user.id)
-            redirect "/habit_entries/#{habit_entry.id}"
+            redirect "/habit_entries/#{@habit_entry.id}" 
         else
             redirect '/habit_entries/new'
         end
@@ -25,7 +29,8 @@ class HabitEntriesController < ApplicationController
 
     get '/habit_entries/:id' do
         @habit_entry = HabitEntry.find(params[:id])
-        erb ':habit_entries/show'
+        
+        erb :'habit_entries/show'
     end
 
     #this route should send us to the habit_entries/edit.erb, which will
@@ -33,13 +38,17 @@ class HabitEntriesController < ApplicationController
     get '/habit_entries/:id/edit' do
         set_habit_entry
         if logged_in?
-            if @habit_entry.user == current_user
+            if authorized_to_edit?(@habit_entry)
                 erb :'habit_entries/edit'
             else 
                 redirect "users/#{current_user.id}"
             end
         else
             redirect '/'
+            #this needs to be a redirect because of separation of concerns. Whenever we build method or controller acitons 
+            #need to be what the job of the action (delete action) is . The job of this action is to delete the journal entry. 
+            #It does a quick check to amke sure it's allowed but it's not its job to SHOW us something. That's the job of the 
+            #get request.
         end
     end
 
@@ -64,6 +73,16 @@ class HabitEntriesController < ApplicationController
     #1. RIGHT NOW anyone can edit anyone else's habits bc nothing in the 2 routes from preventing users from modifying other user's data
     #2. ALSO, I CAN EDIT a habit entry to be blank
    
+    delete '/habit_entries/:id' do
+        set_habit_entry
+        if authorized_to_edit?(@habit_entry)
+            @habit_entry.destroy
+            redirect '/habit_entries'
+        else
+            redirect '/habit_entries'
+        end
+    end
+
 
     private
     def set_habit_entry
