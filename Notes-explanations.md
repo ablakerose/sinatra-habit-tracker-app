@@ -26,11 +26,11 @@ git push -u origin master
 push is what pushes all my changes up to the git repository
 origin master is what we tell it where to push it.
 
-#purpose of migrations
+# purpose of migrations
 
 Migrations build the data base and the structure of the database; in other words create the tables. The migration tells active record and sqlite to include and here are the columns to put in those types. 
 
-#ActiveRecord::Base
+# ActiveRecord::Base
 User Model inherits from this gem that is being used as an Objection Relational Mapper throughout this project
 
 Base is the "Class" in the ActiveRecord module 
@@ -71,3 +71,42 @@ when we redirect, we're sending a brand new get request. And when that happens, 
 that is the ':id'. It's like whatever comes after the slash is a route variable called 'id' that is put somewhere in the form of a hash (params). When a user submits data in an application through route variables or forms, all the data is stored in a hash params that is part of Rack.
 :id is a URL variable 
 query strings ?name=avi (this also goes in the params hash. The query is the "?" then the key is name and value is avi
+
+#Gems to USE ActiveRecord
+(1) Activerecord gem: gives us access to the magical database mapping and association powers
+(2) The rake gem, short for "ruby make", is a package that lets us quickly create files and folders, and automate tasks such as database creation; we define these in a file called Rakefile (create database, create a migration, etc.)
+(3) Sinatra-activerecord gem gives us access to some awesome Rake tasks. 
+#Gems: additional
+(4) sqlite3 is our database adapter gem - it's what allows our Ruby application to communicate with a SQL database
+(5) tux: give us an interactive console that pre-loads our database and ActiveRecord relationships for us
+
+#CRUD
+Create: implemented in Sinatra by building a route, or controller action, to render a form for creating a new instance of your model.
+
+Read:  two ways in which we can read data. We may want to "read" or deliver to our user, all of the instances of a class, or a specific instance of a class
+(get / models --> index.erb OR get / models/:id --> show.erb)
+
+Update: need a controller action that renders an update form, and we need a controller action to catch the post request sent by that form
+(get / edit --> edit.erb (form below) --> patch / :id)
+<form action="/models/<%= @model.id %>" method="post">
+    <input id="hidden" type="hidden" name="_method" value="patch">
+    <input type="text" ...>
+</form>
+
+delete: It doesn't get its own view page but instead is implemented via a "delete button" on the show page of a given instance. This "delete button", however, isn't really a button; it's a form! The form should send a DELETE request to delete '/models/:id/delete' and should contain only a "submit" button with a value of "delete". That way, it will appear as only a button to the user.
+(get /:id --> show.erb --> post / delete )
+<form method="post" action="/models/<%= @model.id %>/delete">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="delete">
+</form>
+
+#Logging in
+The action of logging in is the simple action of storing a user's ID in the session hash
+
+#Logging Out
+This means terminating the period of interaction between a given user and our app. The action of 'logging out' is really just the action of clearing all of the data, including the user's ID, from the session hash. Luckily for us, there is already a Ruby method for emptying a hash: #clear.
+
+#sessions off: sinatra is not issuing the browser a cookie
+
+# rack 
+defaults to "get" and "post" so to do a patch or delete request, we need the override code
