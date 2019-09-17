@@ -36,8 +36,8 @@ class ApplicationController < Sinatra::Base
       #returns true or false based on whether the user of the habit is the current user.
     end
 
+# BUILD HELPER METHOD FOR REDIRECTING IF NOT LOGGED IN
 
-  
   end
 
 

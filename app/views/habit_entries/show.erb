@@ -2,9 +2,16 @@ SHOW PAGE FOR A HABIT ENTRY
 
 <p><%= @habit_entry.habit_content %></p>
 
-<% if authorized_to_edit?(habit_entry) %>
-    <a href="/habit_entries/<%= @journal_entry.id %>/edit">Edit Entry</a>
+<% if authorized_to_edit?(@habit_entry) %>
+    <a href="/habit_entries/<%= @habit_entry.id %>/edit">Edit Entry</a>
+    <a href="">Delete Entry</a>
+    <form class="" action="/habit_entries/<%= @habit_entry.id %>" method="post">
+    <input id="hidden" type="hidden" name="_method" value="DELETE">
+    <input type="submit" name="" value="Delete this habit">
+  </form>
+    
+  <% end %>
 
-    Delete Link  
-    <a href="/habit_entries/<%= @journal_entry.id %>/delete">Delete Entry</a>
-<% end %>
+
+
+
