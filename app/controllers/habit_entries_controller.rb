@@ -5,7 +5,7 @@ class HabitEntriesController < ApplicationController
         @habit_entries = HabitEntry.all
         erb :'habit_entries/index'
     end
-
+ 
     get '/habit_entries/new' do 
         erb :'habit_entries/new'
     end
@@ -14,9 +14,7 @@ class HabitEntriesController < ApplicationController
         #I want to create a new habit entry and save it to the database
         #BUT I only want to save a habit if it has some content
         # I also only want to create a habit entry if a user is logged in
-        if !logged_in?
-            redirect '/'
-        end
+        redirect_if_not_logged_in
 
         if params[:habit_content] != ""
             #create a new habit_entry
@@ -39,26 +37,24 @@ class HabitEntriesController < ApplicationController
     #render an edit form
     get '/habit_entries/:id/edit' do
         set_habit_entry
-        if logged_in?
-            if authorized_to_edit?(@habit_entry)
-                erb :'habit_entries/edit'
-            else 
-                redirect "users/#{current_user.id}"
-            end
-        else
-            redirect '/'
+        redirect_if_not_logged_in
+        if authorized_to_edit?(@habit_entry)
+            erb :'habit_entries/edit'
+        else 
+            redirect "users/#{current_user.id}"
+        end
+        
             #this needs to be a redirect because of separation of concerns. Whenever we build method or controller acitons 
             #need to be what the job of the action (delete action) is . The job of this action is to delete the journal entry. 
             #It does a quick check to amke sure it's allowed but it's not its job to SHOW us something. That's the job of the 
             #get request.
-        end
     end
 
         #This action's job is to... 
     patch '/habit_entries/:id' do
        #1. find the habit entry
        set_habit_entry
-       if logged_in?
+       redirect_if_not_logged_in
             if @habit_entry.user == current_user && params[:habit_content] !=""
                 #2. update the habit entry
                 @habit_entry.update(habit_content: params[:content])
@@ -67,9 +63,6 @@ class HabitEntriesController < ApplicationController
             else
                 redirect "users/#{current_user.id}"
             end
-        else 
-            redirect '/' 
-        end
     end
     #*** MAJOR PROBLEMS***
     #1. RIGHT NOW anyone can edit anyone else's habits bc nothing in the 2 routes from preventing users from modifying other user's data

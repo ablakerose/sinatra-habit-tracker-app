@@ -37,6 +37,13 @@ class ApplicationController < Sinatra::Base
       #returns true or false based on whether the user of the habit is the current user.
     end
 
+    def redirect_if_not_logged_in
+      if !logged_in?
+        flash[:errors] = "You must be logged in to view the page you tried to view."
+        redirect '/'
+      end
+    end
+
 # BUILD HELPER METHOD FOR REDIRECTING IF NOT LOGGED IN
 
   end

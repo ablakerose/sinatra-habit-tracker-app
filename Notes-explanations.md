@@ -72,6 +72,9 @@ that is the ':id'. It's like whatever comes after the slash is a route variable 
 :id is a URL variable 
 query strings ?name=avi (this also goes in the params hash. The query is the "?" then the key is name and value is avi
 
+# Render versus Redirect (regarding variables)
+Difference between render and redirect. Do not have access to variables in a redirect. Only have access to variables in render.
+
 # Gems to USE ActiveRecord
 (1) Activerecord gem: gives us access to the magical database mapping and association powers
 (2) The rake gem, short for "ruby make", is a package that lets us quickly create files and folders, and automate tasks such as database creation; we define these in a file called Rakefile (create database, create a migration, etc.)
@@ -113,3 +116,4 @@ defaults to "get" and "post" so to do a patch or delete request, we need the ove
 
 # flash
 Flash messages allow us to communicate to a user that something happened. You cannot put a flash message inside of a route that ends in an ERB. It will not work. Since flash only lasts one HTTP request and they are not available until we fire that HTTP request. Flash messages must be built in our controller where we REDIRECT (which is good, because usually we need them when we create, update or delete something and these usually end in redirects). 
+
