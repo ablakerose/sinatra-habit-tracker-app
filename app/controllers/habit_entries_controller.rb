@@ -24,7 +24,7 @@ class HabitEntriesController < ApplicationController
             @habit_entry = HabitEntry.create(habit_content: params[:habit_content], user_id: current_user.id)
             redirect "/habit_entries/#{@habit_entry.id}" 
         else
-            flash[:message] = "It appears you have not entered text. Please try again."
+            flash[:errors] = "It appears you have not entered text. Please try again."
             redirect '/habit_entries/new'
         end
     end

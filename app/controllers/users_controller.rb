@@ -20,9 +20,10 @@ class UsersController < ApplicationController
             session[:user_id] = @user.id #actually logging the user in
             # redirect to the user's landing page (show? index? dashboard?)
             puts session
+            flash[:message] = "Welcome, #{@user.name}!"
             redirect "users/#{@user.id}"
         else 
-            flash[:message] = "I'm sorry, we do not recognize this username or password. Please sign up or re-enter your username and password again."
+            flash[:errors] = "I'm sorry, we do not recognize this username or password. Please sign up or try again."
             #tell the user they entered invalid credentials
             #redirect them to the login page
             redirect '/login'

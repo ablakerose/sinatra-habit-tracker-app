@@ -112,4 +112,4 @@ This means terminating the period of interaction between a given user and our ap
 defaults to "get" and "post" so to do a patch or delete request, we need the override code
 
 # flash
-Flash messages allow us to communicate to a user that something happened. You cannot put a flash message inside of a route that ends in an ERB. It will not work. Since flash only lasts one HTTP request and they are not available until we fire that HTTP request. Flash messages must be built in our controller where we REDIRECT (which is good, because usually we need them when we create, update or delete something and these usually end in redirects).
+Flash messages allow us to communicate to a user that something happened. You cannot put a flash message inside of a route that ends in an ERB. It will not work. Since flash only lasts one HTTP request and they are not available until we fire that HTTP request. Flash messages must be built in our controller where we REDIRECT (which is good, because usually we need them when we create, update or delete something and these usually end in redirects). 
