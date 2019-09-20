@@ -44,11 +44,12 @@ class UsersController < ApplicationController
     
         # "name"=>"Blake"
         # "email"=>"blake@blake.com"
-        if params[:name] != "" && params[:email] != "" && params[:password] != ""
-            @user = User.create(params)
+        @user = User.new(params)
+        if @user.save
             session[:user_id] = @user.id #actually logging the user in
             #above, this is mass-assignment
             #where do I go? one option is the user show page. 
+            flash[:message] = "You have successfully created an account, #{@user.name}! Welcome!"
             redirect "/users/#{@user.id}"
             #when we redirect
             #this is the dynamic part of the URL. The only place where we use the symbol of the URL is where we define it which is inside the controller. In rails you do it in a different file.
@@ -62,6 +63,7 @@ class UsersController < ApplicationController
             #not valid input
             #it would be better to include a message to the user
             #tell them what is wrong (stretch goal)
+            flash[:errors] = "Uh oh! #{@user.errors.full_messages.to_sentence}."
             redirect '/signup'
         end
 
