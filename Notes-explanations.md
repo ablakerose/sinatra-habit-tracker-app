@@ -35,52 +35,52 @@ User Model inherits from this gem that is being used as an Objection Relational 
 
 Base is the "Class" in the ActiveRecord module 
 
-#Rake
+# Rake
 this is a way to use the command line to create Ruby code wtihout having to run it manually rake -T
 
-#has_secure_password
+# has_secure_password
 have access to this because of bcrypt and it allows us to use an active record method called "authenticate" which takes a password as a plane string and checks it against authenticates hash.
 
-#git commit language
+# git commit language
 imagine I'm talking to my project manager. "If you accept this commit, it will... " and then I finish that sentence.
 
-#t.timestamps null: false
+# t.timestamps null: false
 automatically gives timestamps whenever create or change a model.
 
 #breaking up git commits (video 1 time 50 mins)
 
-#What Is Tux
+# What Is Tux
 Tux is an incredible Ruby gem that lets you access your database and perform all CRUD operations on it through the terminal. It also loads a full environment in the console that allows you to see all routes and views. Primarily, you'll use Tux to make sure your database is set up properly, play around with Ruby objects, and make sure your ActiveRecord associations are working properly.
 
-#CONTROLLERS AND INHERITANCE
+# CONTROLLERS AND INHERITANCE
 All controllers inherit from Application Controller because that gives all controllers any applications that are built in the application controller.
 
-#params
+# params
 the container/vehicle that is passed in by the user. Its a hash. Like a bus that goes back and forth from the views to the controllers. The passengers are the emails and carries
 
-#FORMS
+# FORMS
 within a form, the "class" refers to a CSS class; the "action" refers to route of the controller we want to navigate to once it's subtmitted.
 
-#rendering
+# rendering
 rarely are we going to render from a post, patch or delete request. rendering should happen from a get request.
 
-#redirect
+# redirect
 when we redirect, we're sending a brand new get request. And when that happens, all variables created within that particular controller route/ action get annihilated and are gone. Redirects destroy instance variables. If we want an instance variable to live on, we can ERB (which calls the render method)
 
-#route variable
+# route variable
 that is the ':id'. It's like whatever comes after the slash is a route variable called 'id' that is put somewhere in the form of a hash (params). When a user submits data in an application through route variables or forms, all the data is stored in a hash params that is part of Rack.
 :id is a URL variable 
 query strings ?name=avi (this also goes in the params hash. The query is the "?" then the key is name and value is avi
 
-#Gems to USE ActiveRecord
+# Gems to USE ActiveRecord
 (1) Activerecord gem: gives us access to the magical database mapping and association powers
 (2) The rake gem, short for "ruby make", is a package that lets us quickly create files and folders, and automate tasks such as database creation; we define these in a file called Rakefile (create database, create a migration, etc.)
 (3) Sinatra-activerecord gem gives us access to some awesome Rake tasks. 
-#Gems: additional
+# Gems: additional
 (4) sqlite3 is our database adapter gem - it's what allows our Ruby application to communicate with a SQL database
 (5) tux: give us an interactive console that pre-loads our database and ActiveRecord relationships for us
 
-#CRUD
+# CRUD
 Create: implemented in Sinatra by building a route, or controller action, to render a form for creating a new instance of your model.
 
 Read:  two ways in which we can read data. We may want to "read" or deliver to our user, all of the instances of a class, or a specific instance of a class
@@ -100,13 +100,16 @@ delete: It doesn't get its own view page but instead is implemented via a "delet
   <input type="submit" value="delete">
 </form>
 
-#Logging in
+# Logging in
 The action of logging in is the simple action of storing a user's ID in the session hash
 
-#Logging Out
+# Logging Out
 This means terminating the period of interaction between a given user and our app. The action of 'logging out' is really just the action of clearing all of the data, including the user's ID, from the session hash. Luckily for us, there is already a Ruby method for emptying a hash: #clear.
 
-#sessions off: sinatra is not issuing the browser a cookie
+# Sessions off: sinatra is not issuing the browser a cookie
 
 # rack 
 defaults to "get" and "post" so to do a patch or delete request, we need the override code
+
+# flash
+Flash messages allow us to communicate to a user that something happened. You cannot put a flash message inside of a route that ends in an ERB. It will not work. Since flash only lasts one HTTP request and they are not available until we fire that HTTP request. Flash messages must be built in our controller where we REDIRECT (which is good, because usually we need them when we create, update or delete something and these usually end in redirects).

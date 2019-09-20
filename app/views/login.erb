@@ -1,7 +1,8 @@
 Log in!
 
-
-
+<% if flash[:message] %>
+    <h3><%= flash[:message] %></h3>
+<% end %>
 <form class="" action="/login" method="post">
     <label for="email">Email: </label>    
     <input type="text" name="email" value"">
@@ -9,4 +10,6 @@ Log in!
     <input type="text" name="password" value"">
     <input type="submit" value"Login">
 </form>
+
+<a href="/">Back</a>
 

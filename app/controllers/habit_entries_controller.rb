@@ -18,11 +18,13 @@ class HabitEntriesController < ApplicationController
             redirect '/'
         end
 
-        if params[:content] !=""
+        if params[:habit_content] != ""
             #create a new habit_entry
+            flash[:message] = "Your habit has been saved. How exciting!"
             @habit_entry = HabitEntry.create(habit_content: params[:habit_content], user_id: current_user.id)
             redirect "/habit_entries/#{@habit_entry.id}" 
         else
+            flash[:message] = "It appears you have not entered text. Please try again."
             redirect '/habit_entries/new'
         end
     end
@@ -57,7 +59,7 @@ class HabitEntriesController < ApplicationController
        #1. find the habit entry
        set_habit_entry
        if logged_in?
-            if @habit_entry.user == current_user
+            if @habit_entry.user == current_user && params[:habit_content] !=""
                 #2. update the habit entry
                 @habit_entry.update(habit_content: params[:content])
                 #3. redirect to the show page of whatever was just created or modified. 
@@ -94,7 +96,6 @@ class HabitEntriesController < ApplicationController
 
     # get '/habit_entries/:id' do 
     #     @habit_entry = HabitEntry.find)params[:id])
-        
     # end
 
 

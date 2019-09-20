@@ -4,7 +4,7 @@ SHOW PAGE FOR A HABIT ENTRY
 
 <% if authorized_to_edit?(@habit_entry) %>
     <a href="/habit_entries/<%= @habit_entry.id %>/edit">Edit Entry</a>
-    <a href="">Delete Entry</a>
+    <br><br>
     <form class="" action="/habit_entries/<%= @habit_entry.id %>" method="post">
     <input id="hidden" type="hidden" name="_method" value="DELETE">
     <input type="submit" name="" value="Delete this habit">

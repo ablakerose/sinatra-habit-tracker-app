@@ -22,8 +22,10 @@ class UsersController < ApplicationController
             puts session
             redirect "users/#{@user.id}"
         else 
+            flash[:message] = "I'm sorry, we do not recognize this username or password. Please sign up or re-enter your username and password again."
             #tell the user they entered invalid credentials
             #redirect them to the login page
+            redirect '/login'
         end
 
     end
@@ -65,7 +67,6 @@ class UsersController < ApplicationController
     end
 
     get '/users/:id' do
-        
         @user = User.find_by(id: params[:id])
         erb :'/users/show'
     end
