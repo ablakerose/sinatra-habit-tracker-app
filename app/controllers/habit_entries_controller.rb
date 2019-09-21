@@ -18,15 +18,16 @@ class HabitEntriesController < ApplicationController
 
         if params[:habit_content] != ""
             #create a new habit_entry
-            flash[:message] = "Your habit has been saved. How exciting!"
-            @habit_entry = HabitEntry.create(habit_content: params[:habit_content], user_id: current_user.id)
-            redirect "/habit_entries/#{@habit_entry.id}" 
+           
+            @habit_entry = HabitEntry.create(habit_content: params[:habit_content], user_id: current_user.id, title: params[:title])
+             flash[:message] = "Your habit entry has been saved!" if @habit_entry.id
+             redirect "/habit_entries/#{@habit_entry.id}" 
         else
             flash[:errors] = "It appears you have not entered text. Please try again."
             redirect '/habit_entries/new'
         end
     end
-
+ 
     get '/habit_entries/:id' do
         @habit_entry = HabitEntry.find(params[:id])
         
@@ -72,6 +73,7 @@ class HabitEntriesController < ApplicationController
         set_habit_entry
         if authorized_to_edit?(@habit_entry)
             @habit_entry.destroy
+            flash[:message] = "Your habit entry has been deleted."
             redirect '/habit_entries'
         else
             redirect '/habit_entries'

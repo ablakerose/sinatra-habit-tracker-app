@@ -14,6 +14,7 @@
 ActiveRecord::Schema.define(version: 20190906171214) do
 
   create_table "habit_entries", force: :cascade do |t|
+    t.string   "title"
     t.string   "habit_content"
     t.integer  "user_id"
     t.datetime "created_at",    null: false

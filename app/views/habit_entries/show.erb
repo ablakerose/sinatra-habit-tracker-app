@@ -1,17 +1,21 @@
-SHOW PAGE FOR A HABIT ENTRY
-
+<h4><%= @habit_entry.title %></h4>
 <p><%= @habit_entry.habit_content %></p>
+
+
+<p>Created by: <%= @habit_entry.user.name %></p>
+
+<p>created on <%= @habit_entry.formatted_created_by %></p>
 
 <% if authorized_to_edit?(@habit_entry) %>
     <a href="/habit_entries/<%= @habit_entry.id %>/edit">Edit Entry</a>
-    <br><br>
+    <br><br> 
     <form class="" action="/habit_entries/<%= @habit_entry.id %>" method="post">
     <input id="hidden" type="hidden" name="_method" value="DELETE">
     <input type="submit" name="" value="Delete this habit">
   </form>
     
   <% end %>
-
+ 
 
 
 
