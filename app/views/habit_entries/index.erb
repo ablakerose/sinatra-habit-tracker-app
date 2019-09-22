@@ -4,6 +4,8 @@ ALL HABIT ENTRIES
     <h6><a href="/habit_entries/<%= habit_entry.id %>"<%=habit_entry.created_at %></a></h6>
     <strong> <%= habit_entry.title %></strong>
     <p><%= habit_entry.created_at %></p> 
+    <p><%= habit_entry.habit_content %></p>
+    <p>Completed: <%= habit_entry.completed_habit %></p> 
     <p>By <%= habit_entry.user.name %></p>
     <br><br>
 <% end %>

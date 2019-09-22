@@ -19,7 +19,7 @@ class HabitEntriesController < ApplicationController
         if params[:habit_content] != ""
             #create a new habit_entry
            
-            @habit_entry = HabitEntry.create(habit_content: params[:habit_content], user_id: current_user.id, title: params[:title])
+            @habit_entry = HabitEntry.create(habit_content: params[:habit_content], user_id: current_user.id, title: params[:title], completed_habit: params[:completed_habit])
              flash[:message] = "Your habit entry has been saved!" if @habit_entry.id
              redirect "/habit_entries/#{@habit_entry.id}" 
         else
