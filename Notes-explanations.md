@@ -36,7 +36,9 @@ User Model inherits from this gem that is being used as an Objection Relational 
 Base is the "Class" in the ActiveRecord module 
 
 # Rake
-this is a way to use the command line to create Ruby code wtihout having to run it manually rake -T
+this is a way to use the command line to create Ruby code wtihout having to run it manually rake -T (gives all rake commands available)
+commands come from Sinatra ActiveRecord Rake
+rake db:seed looks for a file called seeds and runs it. 
 
 # has_secure_password
 have access to this because of bcrypt and it allows us to use an active record method called "authenticate" which takes a password as a plane string and checks it against authenticates hash.

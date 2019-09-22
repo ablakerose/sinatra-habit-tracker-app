@@ -28,7 +28,7 @@ class ApplicationController < Sinatra::Base
       @current_user ||= User.find_by(id: session[:user_id])
       #User.find_by is an active record method that's going to query the database.
       #Looks at the database and finds a user ID that matches the session hash. If someone is not logged
-      #Current user would be assigned to nill and logged_in would be false. 
+      #Current user would be assigned to nil and logged_in would be false. 
       #having the instance variable at the beginning of the "or" just means less queries to the DB
     end
 
@@ -43,8 +43,7 @@ class ApplicationController < Sinatra::Base
         redirect '/'
       end
     end
-
-# BUILD HELPER METHOD FOR REDIRECTING IF NOT LOGGED IN
+# HELPER METHOD FOR REDIRECTING IF NOT LOGGED IN
 
   end
 

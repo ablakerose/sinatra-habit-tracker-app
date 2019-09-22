@@ -1,9 +1,10 @@
 <h4><%= @habit_entry.title %></h4>
-<p><%= @habit_entry.habit_content %></p>
+<h4><%= @habit_entry.habit_content %></h4>
+<h4>Completed: <%= @habit_entry.completed_habit %></h4> 
 
 
-<p>Created by: <%= @habit_entry.user.name %></p>
-
+<h4>Created by: <%= @habit_entry.user.name %></h4>
+<br><br> 
 <p>created on <%= @habit_entry.formatted_created_by %></p>
 
 <% if authorized_to_edit?(@habit_entry) %>
