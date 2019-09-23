@@ -11,15 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190922010221) do
+ActiveRecord::Schema.define(version: 20190923131000) do
 
   create_table "habit_entries", force: :cascade do |t|
     t.string   "title"
     t.string   "habit_content"
     t.integer  "user_id"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.boolean  "completed_habit", default: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.boolean  "completed_habit",  default: false
+    t.date     "date_to_do_habit"
   end
 
   create_table "users", force: :cascade do |t|
