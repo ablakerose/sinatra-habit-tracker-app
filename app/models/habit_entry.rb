@@ -13,6 +13,9 @@ class HabitEntry < ActiveRecord::Base
         self.created_at.strftime("%A")
     end
 
+    def formatted_to_day
+        self.created_at.strftime("%A")
+    end
     
 
 end

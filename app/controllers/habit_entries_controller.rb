@@ -18,7 +18,7 @@ class HabitEntriesController < ApplicationController
 
         if params[:habit_content] != ""
             #create a new habit_entry
-            @habit_entry = HabitEntry.create(habit_content: params[:habit_content], user_id: current_user.id, title: params[:title], completed_habit: params[:completed_habit])
+            @habit_entry = HabitEntry.create(habit_content: params[:habit_content], user_id: current_user.id, title: params[:title], completed_habit: params[:completed_habit],  date_to_do_habit: params[:date_to_do_habit])
              flash[:message] = "Your habit entry has been saved!" if @habit_entry.id
              redirect "/habit_entries/#{@habit_entry.id}" 
         else
@@ -56,7 +56,7 @@ class HabitEntriesController < ApplicationController
        redirect_if_not_logged_in
             if @habit_entry.user == current_user && params[:habit_content] !=""
                 #2. update the habit entry
-                @habit_entry.update(habit_content: params[:content], title: params[:title], completed_habit: params[:completed])
+                @habit_entry.update(habit_content: params[:content], title: params[:title], completed_habit: params[:completed], date_to_do_habit: params[:date_to_do_habit])
                 #3. redirect to the show page of whatever was just created or modified. 
                 redirect "/habit_entries/#{@habit_entry.id}"
             else
