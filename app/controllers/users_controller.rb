@@ -72,6 +72,7 @@ class UsersController < ApplicationController
     get '/users/:id' do
         redirect_if_not_logged_in
         @user = User.find_by(id: params[:id])
+        @sorted_entries = @user.habit_entries.sort_by &:date_to_do_habit
         erb :'/users/show'
     end
 

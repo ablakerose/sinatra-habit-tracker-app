@@ -1,17 +1,14 @@
 <h2><%= @user.name %>'s Habit Page</h2>
 
-Hello and welcome to your habit homepage. Below is a list of all the habits you have created for yourself!
-
-
-
+<p> Hello and welcome to your habit homepage. Below is a list of all the habits you have created for yourself!</p>
 
 <br><br>
-<% @user.habit_entries.each do |habit_entry| %>
+<% @sorted_entries.each do |habit_entry| %>
     <h5><a href="/habit_entries/<%= habit_entry.id %>"<%=habit_entry.formatted_created_by %></a></h5>
     <strong> <%= habit_entry.title.upcase %></strong>
-    <h5><%= habit_entry.formatted_created_by %>, By <%= habit_entry.user.name %> </h5> 
+    <h5><%= habit_entry.date_to_do_habit %>, By <%= habit_entry.user.name %> </h5> 
     <h5><%= habit_entry.habit_content %></h5>
-    <h5>Completed?: <%= habit_entry.completed_habit %></h5> 
+    <h5>Completed: <%= habit_entry.completed_habit || "false" %></h5> 
   
     <br><br>
 <% end %>
@@ -20,23 +17,6 @@ Hello and welcome to your habit homepage. Below is a list of all the habits you 
 <br><br>
 <br><br>
 
-<% @user.habit_entries.each do |habit_entry| %>
-    <h5><a href="/habit_entries/<%= habit_entry.id %>"</a></h5>
-   <h5><%=habit_entry.sorted_by_day  %></h5>
-  
-    <br><br>
-<% end %>
-<br><br>
-<br><br>
-<br><br>
-<br><br>
-<br><br>
-<br><br>
-<% @user.habit_entries.each do |habit_entry| %>
-    <h5><%=habit_entry.sorted_by_day%> </h5>
-  
-    <br><br>
-<% end %>
 
-<h4><%= @user.email %></h4>
+
 

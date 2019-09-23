@@ -18,6 +18,7 @@
   <div class="nav">
     <% if logged_in? %>
       <a href="/logout">Logout</a>
+      <a href="/users/<%=session[:user_id]%>">Home</a>
       <a href="/habit_entries">All Habit Entries</a>
       <a href="/habit_entries/new">New Entry</a>
     <% end %>

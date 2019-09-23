@@ -16,10 +16,11 @@ class HabitEntriesController < ApplicationController
         # I also only want to create a habit entry if a user is logged in
         redirect_if_not_logged_in
 
-        if params[:habit_content] != ""
+        if params[:title] != "" && params[:content] != ""
             #create a new habit_entry
-            @habit_entry = HabitEntry.create(habit_content: params[:habit_content], user_id: current_user.id, title: params[:title], completed_habit: params[:completed_habit],  date_to_do_habit: params[:date_to_do_habit])
-             flash[:message] = "Your habit entry has been saved!" if @habit_entry.id
+            @habit_entry = HabitEntry.create(habit_content: params[:content], user_id: current_user.id, title: params[:title], completed_habit: params[:completed],  date_to_do_habit: params[:date_to_do_habit])
+            #@habit_entry = HabitEntry.create(content: params[:habit_content], title: params[:title], completed_habit: params[:completed], date_to_do_habit: params[:date_to_do_habit]) 
+            flash[:message] = "Your habit entry has been saved!" if @habit_entry.id
              redirect "/habit_entries/#{@habit_entry.id}" 
         else
             flash[:errors] = "It appears you have not entered text. Please try again."
@@ -28,7 +29,8 @@ class HabitEntriesController < ApplicationController
     end
  
     get '/habit_entries/:id' do
-        @habit_entry = HabitEntry.find(params[:id])
+        #@habit_entry = HabitEntry.find(params[:id])
+        set_habit_entry
         erb :'habit_entries/show'
     end
 
@@ -36,6 +38,9 @@ class HabitEntriesController < ApplicationController
     #render an edit form
     get '/habit_entries/:id/edit' do
         set_habit_entry
+        #by calling this method, I have access to this instance variable 
+        #using ActiveRecord to find a habit using the params ID
+        #returning that from the DB 
         redirect_if_not_logged_in
         if authorized_to_edit?(@habit_entry)
             erb :'habit_entries/edit'
@@ -52,6 +57,7 @@ class HabitEntriesController < ApplicationController
         #This action's job is to... 
     patch '/habit_entries/:id' do
        #1. find the habit entry
+       
        set_habit_entry
        redirect_if_not_logged_in
             if @habit_entry.user == current_user && params[:habit_content] !=""
