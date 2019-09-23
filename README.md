@@ -1,4 +1,4 @@
-A simple habit tracker app that allows users to log in, sign up, and create habit entries. Users can also delete and edit their own entries. 
+A simple habit tracker app that allows users to log in, sign up, and create habit entries that are designated for specific days of completion. You can note which days you completed these habits and which you did not. Users can also delete and edit their own habits as well as see the habits posted of other users. 
 
 LICENSE 
 
