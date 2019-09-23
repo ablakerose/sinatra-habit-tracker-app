@@ -16,6 +16,10 @@ class HabitEntry < ActiveRecord::Base
     def formatted_to_day
         self.created_at.strftime("%A")
     end
+
+    def formatted_to_do_date_to_day
+        self.date_to_do_habit.strftime("%A")
+    end
     
 
 end

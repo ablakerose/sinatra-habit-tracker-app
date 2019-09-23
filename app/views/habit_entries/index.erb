@@ -1,12 +1,13 @@
-<h1>List of tiny habits of all users</h1>  
+<h1>List of habits of all users</h1>  
 <br><br>
 <br><br>
 
 <% @habit_entries.each do |habit_entry| %>
     <h5><a href="/habit_entries/<%= habit_entry.id %>"<%=habit_entry.formatted_created_by %></a></h5>
-    <strong> <%= habit_entry.date_to_do_habit %></strong> 
-    <strong> To Do On: <%= habit_entry.title %></strong>
-    <h5><%= habit_entry.formatted_created_by %>, By <%= habit_entry.user.name %> </h5> 
+    
+    <p><strong> <%= habit_entry.date_to_do_habit %></strong></p>
+    <h5><%= habit_entry.title.upcase %></h5>
+    <h5>By <%= habit_entry.user.name %> </h5> 
     <h5><%= habit_entry.habit_content %></h5>
     <h5>Completed?: <%= habit_entry.completed_habit %></h5> 
   

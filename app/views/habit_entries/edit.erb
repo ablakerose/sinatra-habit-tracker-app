@@ -5,7 +5,7 @@ EDIT PAGE FOR A HABIT ENTRY
     <label for="date_to_do_habit">To Do On:</label>
     <input type="date" name="date_to_do_habit" value ="<%= @habit_entry.date_to_do_habit %>">
     <label for="title">Title:</label>
-    <input type="text" name="title" value ="<%= @habit_entry.title %>">
+    <input type="text" name="title" value ="<%= @habit_entry.title.upcase %>">
     <label for="content">Content:</label>
     <textarea name="content" style="width:auto; height:auto;"><%= @habit_entry.habit_content%></textarea>
     <label for="completed">Completed? (type true or false):</label>
