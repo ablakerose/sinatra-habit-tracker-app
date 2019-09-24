@@ -43,8 +43,6 @@ class ApplicationController < Sinatra::Base
         redirect '/'
       end
     end
-# HELPER METHOD FOR REDIRECTING IF NOT LOGGED IN
-
   end
 
 

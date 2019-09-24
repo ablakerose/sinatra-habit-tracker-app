@@ -15,8 +15,8 @@
   body {
     background-color: rgb(11, 128, 63);
     color: #333;
-    font-family: Sans-Serif;
-    line-height: 18px;
+    font-family: Avenir Next;
+    line-height: 15px;
   }
 
   .wrapper {
@@ -24,15 +24,15 @@
     -moz-box-shadow: 0 0 10px rgba(0,0,0,.3);
     -webkit-box-shadow: 0 0 10px rgba(0,0,0,.3);
     box-shadow: 0 0 10px rgba(0,0,0,.3);
-    margin: 16px auto;
-    max-width: 960px;
+    margin: 25px auto;
+    max-width: 4600px;
     padding: 2.25%; /* 18px / 800px */
     width: 85%;
   }
 
   h1 {
-    font-size: 36px;
-    line-height: 54px;
+    font-size: 25px;
+    line-height: 40px;
   }
 
   h2 {
